@@ -44,7 +44,7 @@ var bump = require('gulp-bump');
 var git = require('gulp-git');
 
 function ignoreerror() {
-  /* jshint ignore:start */ // using `this` in this context is weird 
+  /* jshint ignore:start */ // using `this` in this context is weird
   this.emit('end');
   /* jshint ignore:end */
 }
@@ -58,7 +58,7 @@ function startGulp(name, opts) {
   var tests = ['test/**/*.js'];
   var alljs = files.concat(tests);
 
-  var buildPath = './node_modules/bitcore-build-komodo/';
+  var buildPath = './node_modules/bitcore-build-pirate/';
   var buildModulesPath = buildPath + 'node_modules/';
   var buildBinPath = buildPath + 'node_modules/.bin/';
 
@@ -102,9 +102,9 @@ function startGulp(name, opts) {
     var browserifyCommand;
 
     if (name !== 'lib') {
-      browserifyCommand = buildBinPath + 'browserify --require ./index.js:' + fullname + ' --external bitcore-lib-komodo -o ' + fullname + '.js';
+      browserifyCommand = buildBinPath + 'browserify --require ./index.js:' + fullname + ' --external bitcore-lib-pirate -o ' + fullname + '.js';
     } else {
-      browserifyCommand = buildBinPath + 'browserify --require ./index.js:bitcore-lib-komodo -o bitcore-lib-komodo.js';
+      browserifyCommand = buildBinPath + 'browserify --require ./index.js:bitcore-lib-pirate -o bitcore-lib-pirate.js';
     }
 
     gulp.task('browser:uncompressed', shell.task([
@@ -325,7 +325,7 @@ function startGulp(name, opts) {
       bumper,
       // build browser files
       browser ? 'browser' : 'noop',
-      // Commit 
+      // Commit
       'release:build-commit',
       // Run git push bitpay $VERSION
       'release:push-tag',
